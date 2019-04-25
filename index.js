@@ -14,6 +14,6 @@ module.exports = async (req, res) => {
 
   res.writeHead(200, { "Content-Type": "application/json" });
   // Create response object and send result back to Slack
-  const response_type = "ephemeral";
+  const response_type = "in_channel";
   res.end(JSON.stringify({ response_type, text: `_${result}_` }));
 };
