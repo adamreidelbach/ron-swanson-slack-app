@@ -1,9 +1,19 @@
 const fetch = require('node-fetch');
 
-async function getQuote() {
-  const response = await fetch('https://ron-swanson-quotes.herokuapp.com/v2/quotes');
-  const quote = await response.json();
-  return quote ? quote[0] : 'no quote found';
-}
+const url = "https://ron-swanson-quotes.herokuapp.com/v2/quotes";
+module.exports = async (req, res) => {
+  let result;
 
-getQuote();
+  try {
+    const response = await fetch(url);
+    const quote = await response.json();
+    result = quote[0];
+  } catch (error) {
+    result = 'There was an error during your request';
+  }
+
+  res.writeHead(200, { "Content-Type": "application/json" });
+  // Create response object and send result back to Slack
+  const response_type = "ephemeral";
+  res.end(JSON.stringify({ response_type, text: `_${result}_` }));
+};

@@ -1,5 +1,5 @@
 {
-  "name": "eval",
+  "name": "ron-swanson-slack-app",
   "version": 2,
   "builds": [
     {
